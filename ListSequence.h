@@ -27,7 +27,7 @@ public:
 
     virtual ~ListSequence() {}
 
-    // ----- Декомпозиция -----
+    // Декомпозиция
     int GetLength() const
     {
         return data.GetLength();
@@ -48,7 +48,7 @@ public:
         return data.Get(index);
     }
 
-    // ----- Операции -----
+    // Операции
     Sequence<T> *Append(T item)
     {
         Sequence<T> *result = this->Instance();
@@ -80,7 +80,7 @@ public:
 
         Sequence<T> *result = this->Instance();
         ListSequence<T> *seq = static_cast<ListSequence<T> *>(result);
-        seq->data.RemoveAt(index); // вызов оптимизированного метода LinkedList
+        seq->data.RemoveAt(index);
         return result;
     }
 
@@ -110,15 +110,15 @@ public:
         return result;
     }
 
-    // ----- Итератор -----
+    // Итератор
     Iterator<T> *GetIterator() const
     {
-        return data.GetIterator(); // делегируем LinkedList
+        return data.GetIterator();
     }
 
-    // ----- Абстрактные методы -----
+    // Абстрактные методы
     virtual Sequence<T> *Instance() = 0;
     virtual Sequence<T> *Clone() const = 0;
 };
 
-#endif // LIST_SEQUENCE_H
+#endif
