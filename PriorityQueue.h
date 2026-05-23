@@ -2,7 +2,7 @@
 #define PRIORITY_QUEUE_H
 
 #include "Sequence.h"
-#include "ArraySequence.h" // для dynamic_cast
+#include "ArraySequence.h"
 #include "MutableArraySequence.h"
 #include "exceptions.h"
 
@@ -12,19 +12,17 @@ class PriorityQueue
 private:
     Sequence<T> *seq;
 
-    // Поиск позиции вставки (по убыванию)
+    // Поиск позиции вставки
     int FindInsertPos(const T &item) const
     {
-        // Пытаемся привести к ArraySequence для бинарного поиска
         ArraySequence<T> *arrSeq = dynamic_cast<ArraySequence<T> *>(seq);
         if (arrSeq)
         {
-            // Бинарный поиск первого элемента, меньшего item
-            int low = 0, high = seq->GetLength(); // high == length (вставка в конец допустима)
+            int low = 0, high = seq->GetLength();
             while (low < high)
             {
                 int mid = (low + high) / 2;
-                if (item > arrSeq->Get(mid)) // убывающий порядок: ищем первый меньший
+                if (item > arrSeq->Get(mid))
                     high = mid;
                 else
                     low = mid + 1;
@@ -33,7 +31,6 @@ private:
         }
         else
         {
-            // Линейный поиск для списка или других реализаций
             int len = seq->GetLength();
             int i = 0;
             while (i < len && !(item > seq->Get(i)))
@@ -84,4 +81,4 @@ public:
     const Sequence<T> *GetSequence() const { return seq; }
 };
 
-#endif // PRIORITY_QUEUE_H
+#endif
