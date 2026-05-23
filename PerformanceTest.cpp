@@ -13,7 +13,7 @@
 #include "Deque.h"
 #include "PriorityQueue.h"
 
-// ---------- Фабрики ----------
+// Фабрики
 Sequence<int> *MakeMutableArray() { return new MutableArraySequence<int>(); }
 Sequence<int> *MakeImmutableArray() { return new ImmutableArraySequence<int>(); }
 Sequence<int> *MakeMutableList() { return new MutableListSequence<int>(); }
@@ -22,7 +22,7 @@ Sequence<int> *MakeImmutableList() { return new ImmutableListSequence<int>(); }
 typedef Sequence<int> *(*Factory)();
 typedef double (*TestFunc)(Factory, int);
 
-// ---------- Тесты для каждого АТД (без лямбд) ----------
+// Тесты для каждого АТД
 
 double TestStack(Factory factory, int n)
 {
@@ -72,7 +72,7 @@ double TestPriorityQueue(Factory factory, int n)
     return double(end - start) / CLOCKS_PER_SEC;
 }
 
-// ---------- Главная функция вывода таблиц ----------
+// Главная функция вывода таблиц
 void RunPerformanceComparison()
 {
     const int sizes[] = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000};
