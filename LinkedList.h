@@ -2,7 +2,7 @@
 #define LINKED_LIST_H
 
 #include "exceptions.h"
-#include "Sequence.h" // для базового класса Iterator<T>
+#include "Sequence.h"
 
 template <class T>
 class LinkedList
@@ -21,20 +21,20 @@ private:
     Node *tail;
     int size;
 
-    // Вспомогательный метод поиска узла по индексу (с оптимизацией обхода)
+    // Вспомогательный метод поиска узла по индексу
     Node *GetNode(int index) const
     {
         if (index < 0 || index >= size)
             throw IndexOutOfRange();
 
         Node *current;
-        if (index < size / 2) // ближе к голове
+        if (index < size / 2)
         {
             current = head;
             for (int i = 0; i < index; i++)
                 current = current->next;
         }
-        else // ближе к хвосту
+        else
         {
             current = tail;
             for (int i = size - 1; i > index; i--)
@@ -44,7 +44,7 @@ private:
     }
 
 public:
-    // ----- Вложенный итератор -----
+    // Вложенный итератор
     class ListIterator : public Iterator<T>
     {
         const LinkedList<T> &list;
@@ -61,7 +61,7 @@ public:
         }
     };
 
-    // ----- Конструкторы -----
+    // Конструкторы
     LinkedList() : head(nullptr), tail(nullptr), size(0) {}
 
     LinkedList(T *items, int count) : head(nullptr), tail(nullptr), size(0)
@@ -80,13 +80,12 @@ public:
         }
     }
 
-    // ----- Оператор присваивания -----
+    // Оператор присваивания
     LinkedList<T> &operator=(const LinkedList<T> &other)
     {
         if (this == &other)
             return *this;
 
-        // очистка
         while (head)
         {
             Node *temp = head;
@@ -97,7 +96,6 @@ public:
         head = tail = nullptr;
         size = 0;
 
-        // копирование
         Node *current = other.head;
         while (current)
         {
@@ -108,7 +106,7 @@ public:
         return *this;
     }
 
-    // ----- Деструктор -----
+    // Деструктор
     ~LinkedList()
     {
         while (head)
@@ -119,7 +117,7 @@ public:
         }
     }
 
-    // ----- Методы доступа -----
+    // Методы доступа
     int GetLength() const
     {
         return size;
@@ -141,10 +139,10 @@ public:
 
     T Get(int index) const
     {
-        return GetNode(index)->data; // использует общий метод поиска
+        return GetNode(index)->data;
     }
 
-    // ----- Модификация -----
+    // Модификация
     void Append(T item)
     {
         Node *node = new Node(item);
@@ -198,7 +196,7 @@ public:
             return;
         }
 
-        Node *current = GetNode(index); // используем общий метод
+        Node *current = GetNode(index);
 
         Node *node = new Node(item);
 
@@ -213,17 +211,17 @@ public:
 
     void RemoveAt(int index)
     {
-        Node *node = GetNode(index); // используем общий метод поиска
+        Node *node = GetNode(index);
 
         if (node->prev)
             node->prev->next = node->next;
         else
-            head = node->next; // удаляется голова
+            head = node->next;
 
         if (node->next)
             node->next->prev = node->prev;
         else
-            tail = node->prev; // удаляется хвост
+            tail = node->prev;
 
         delete node;
         size--;
@@ -236,7 +234,7 @@ public:
 
         LinkedList<T> *result = new LinkedList<T>();
 
-        Node *current = GetNode(start); // начинаем с нужного узла
+        Node *current = GetNode(start);
         for (int i = start; i <= end; i++)
         {
             result->Append(current->data);
@@ -246,11 +244,10 @@ public:
         return result;
     }
 
-    // ----- Фабрика итератора -----
     Iterator<T> *GetIterator() const
     {
         return new ListIterator(*this);
     }
 };
 
-#endif // LINKED_LIST_H
+#endif
