@@ -147,10 +147,10 @@ void TestPolymorphism()
 {
     int arr[] = {1, 2, 3};
     MutableArraySequence<int> arrSeq(arr, 3);
-    PrintSequence(arrSeq); // ссылка
+    PrintSequence(arrSeq);
 
     ImmutableListSequence<int> listSeq(arr, 3);
-    PrintSequence(listSeq); // ссылка
+    PrintSequence(listSeq);
 
     std::cout << "Polymorphism tests passed\n";
 }
