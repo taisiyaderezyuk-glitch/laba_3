@@ -15,7 +15,7 @@
 
 void RunAllTests();
 
-// ---------- Утилиты ----------
+// Утилиты
 Sequence<int> *CreateSequence(int type)
 {
     switch (type)
@@ -48,7 +48,7 @@ int ChooseSequenceType()
     return t;
 }
 
-// ---------- Демонстрации ----------
+// Демонстрации
 void DemoStack()
 {
     int type = ChooseSequenceType();
@@ -88,7 +88,7 @@ void DemoStack()
             break;
         case 4:
             std::cout << "Stack (top to bottom): ";
-            PrintSequence(*stack.GetSequence()); // разыменование указателя -> ссылка
+            PrintSequence(*stack.GetSequence());
             break;
         }
     } while (choice != 0);
@@ -285,14 +285,14 @@ void DemoPerformance()
     }
 
     clock_t start = std::clock();
-    Sequence<int> *concatArr = arrSeq.Concat(arrSeq); // по ссылке
+    Sequence<int> *concatArr = arrSeq.Concat(arrSeq);
     clock_t end = std::clock();
     double arrTime = double(end - start) / CLOCKS_PER_SEC;
     std::cout << "ArraySequence concat: " << arrTime << " s\n";
     delete concatArr;
 
     start = std::clock();
-    Sequence<int> *concatList = listSeq.Concat(listSeq); // по ссылке
+    Sequence<int> *concatList = listSeq.Concat(listSeq);
     end = std::clock();
     double listTime = double(end - start) / CLOCKS_PER_SEC;
     std::cout << "ListSequence concat: " << listTime << " s\n";
@@ -346,7 +346,7 @@ int main()
             break;
         case 6:
             RunPerformanceComparison();
-            break; // <-- новый вызов
+            break;
         case 7:
             RunAllTests();
             break;
