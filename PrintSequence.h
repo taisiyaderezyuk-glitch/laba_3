@@ -1,9 +1,8 @@
-// PrintSequence.h
 #ifndef PRINT_SEQUENCE_H
 #define PRINT_SEQUENCE_H
 
 #include <iostream>
-#include "Sequence.h" // необходимо для Iterator и Sequence
+#include "Sequence.h"
 
 template <class T>
 inline void PrintSequence(const Sequence<T> &seq)
