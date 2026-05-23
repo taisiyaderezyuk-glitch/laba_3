@@ -39,7 +39,7 @@ public:
 
     virtual Iterator<T> *GetIterator() const = 0;
 
-    // Map, Where, Reduce остаются без изменений
+    // Map, Where, Reduce
     template <typename Func>
     Sequence<T> *Map(Func f) const
     {
